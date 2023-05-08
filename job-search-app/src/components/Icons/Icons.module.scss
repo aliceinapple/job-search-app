@@ -1,0 +1,17 @@
+@use "../../styles/" as *;
+
+.star {
+  @include star-icon-style();
+}
+
+.arrow {
+  @include icon-style();
+}
+
+.selected {
+  @include star-icon-style(
+    $fill: $c-blue-500,
+    $stroke: $c-blue-500,
+    $hoverFill: $c-blue-500
+  );
+}

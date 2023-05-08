@@ -1,0 +1,59 @@
+@use "./variables" as *;
+
+@mixin font-style(
+  $font: $font-inter-regular,
+  $size: $font-size-small,
+  $color: $c-black
+) {
+  font-family: $font;
+  font-size: $size;
+  color: $color;
+}
+
+@mixin button-style() {
+  @include font-style($color: $c-white);
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: $c-blue-500;
+
+  &:hover {
+    background-color: $c-blue-400;
+  }
+
+  &:active {
+    background-color: $c-blue-600;
+  }
+}
+
+@mixin star-icon-style(
+  $fill: none,
+  $stroke: $c-grey-500,
+  $hoverFill: none,
+  $hoverStroke: $c-blue-500
+) {
+  fill: $fill;
+  * {
+    stroke: $stroke;
+  }
+  cursor: pointer;
+  &:hover {
+    fill: $hoverFill;
+    * {
+      stroke: $hoverStroke;
+    }
+  }
+}
+
+@mixin icon-style() {
+  cursor: pointer;
+  &:hover {
+    * {
+      stroke: $c-blue-400;
+    }
+  }
+  &:active {
+    * {
+      stroke: $c-blue-500;
+    }
+  }
+}
