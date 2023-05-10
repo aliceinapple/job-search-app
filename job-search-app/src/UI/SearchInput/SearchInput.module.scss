@@ -1,0 +1,10 @@
+.searchInputBlock {
+  @include input-style($border-color: $c-grey-200);
+}
+
+.searchInput {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  width: 100%;
+}

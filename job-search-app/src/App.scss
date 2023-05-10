@@ -1,0 +1,13 @@
+#root,
+body {
+  max-width: 1600px;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background-color: $bg-color;
+  @include font-style();
+}
+
+.container {
+  padding: 0 10%;
+}

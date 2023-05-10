@@ -1,11 +1,15 @@
-@use "../../styles/" as *;
-
 .star {
   @include star-icon-style();
 }
 
 .arrow {
   @include icon-style();
+  transition: all 0.2s ease-in-out;
+}
+
+.arrowLarge {
+  @include icon-style();
+  position: relative;
 }
 
 .selected {

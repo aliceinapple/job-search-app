@@ -1,13 +1,15 @@
 import { Fragment } from "react";
-import "./App.css";
 import Header from "./components/Header";
 import Router from "./components/Router";
+import "./App.scss";
 
 function App() {
   return (
     <Fragment>
       <Header />
-      <Router />
+      <div className="container">
+        <Router />
+      </div>
     </Fragment>
   );
 }

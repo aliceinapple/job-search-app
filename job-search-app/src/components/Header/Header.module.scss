@@ -1,7 +1,42 @@
-@use "../../styles/" as *;
-
 .header {
+  position: relative;
   @include font-style();
-  width: 100%;
+  @include flex($align: center, $justify: center);
   height: 84px;
+  background-color: $c-white;
+  padding: 0 10%;
+}
+
+.headerLogo {
+  position: absolute;
+  left: 10%;
+  @include flex($align: center);
+  gap: 12px;
+}
+
+h1 {
+  @include font-style(
+    $font: $font-poppins,
+    $size: 24px,
+    $weight: 600,
+    $color: $c-black
+  );
+  letter-spacing: -0.02em;
+}
+
+.headerLogoImg {
+  @include bg-image("../../assets/icons/logo_ico.png");
+  width: 30px;
+  height: 30px;
+}
+
+.headerNav {
+  li {
+    list-style-type: none;
+  }
+  ul {
+    padding: 0;
+    @include flex($align: center);
+    gap: 60px;
+  }
 }

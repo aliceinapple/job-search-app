@@ -13,6 +13,8 @@ $c-blue-400: #92c1ff;
 $c-blue-500: #5e96fc;
 $c-blue-600: #3b7cd3;
 
+$bg-color: #f7f7f8;
+
 @font-face {
   font-family: "Inter Regular";
   font-style: normal;
@@ -37,10 +39,22 @@ $c-blue-600: #3b7cd3;
     url("../assets/fonts/Inter-SemiBold.ttf") format("ttf");
 }
 
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Poppins"),
+    url("../assets/fonts/Poppins-SemiBold.ttf") format("ttf");
+}
+
 $font-inter-regular: "Inter Regular", sans-serif;
 $font-inter-medium: "Inter Medium", sans-serif;
 $font-inter-semibold: "Inter SemiBold", sans-serif;
+$font-poppins: "Poppins", sans-serif;
 
 $font-size-small: 14px;
 $font-size-regular: 16px;
 $font-size-heading: 20px;
+
+$border-radius: 8px;
+$transition-fast: all 0.2s ease-in-out;

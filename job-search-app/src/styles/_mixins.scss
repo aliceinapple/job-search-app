@@ -3,19 +3,31 @@
 @mixin font-style(
   $font: $font-inter-regular,
   $size: $font-size-small,
+  $weight: 200,
   $color: $c-black
 ) {
   font-family: $font;
   font-size: $size;
+  font-weight: $weight;
   color: $color;
+}
+
+@mixin block-style($padding: 20px) {
+  border: 1px solid $c-grey-200;
+  border-radius: 12px;
+  background-color: $c-white;
+  padding: $padding;
 }
 
 @mixin button-style() {
   @include font-style($color: $c-white);
+  border: none;
   padding: 10px 20px;
-  border-radius: 8px;
+  border-radius: $border-radius;
+  cursor: pointer;
   background-color: $c-blue-500;
-
+  transition: $transition-fast;
+  width: 100%;
   &:hover {
     background-color: $c-blue-400;
   }
@@ -25,12 +37,27 @@
   }
 }
 
+@mixin text-button-style() {
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: $transition-fast;
+  color: $c-grey-500;
+  &:hover {
+    color: $c-blue-400;
+  }
+  &:active {
+    color: $c-blue-500;
+  }
+}
+
 @mixin star-icon-style(
   $fill: none,
   $stroke: $c-grey-500,
   $hoverFill: none,
   $hoverStroke: $c-blue-500
 ) {
+  transition: $transition-fast;
   fill: $fill;
   * {
     stroke: $stroke;
@@ -46,6 +73,7 @@
 
 @mixin icon-style() {
   cursor: pointer;
+  transition: $transition-fast;
   &:hover {
     * {
       stroke: $c-blue-400;
@@ -56,4 +84,36 @@
       stroke: $c-blue-500;
     }
   }
+}
+
+@mixin input-style($border-color: $c-grey-300) {
+  padding: 8px 12px;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:focus-within {
+    outline: 1px solid $c-blue-500;
+  }
+  input {
+    border: none;
+    outline: none;
+    background: transparent;
+    &::placeholder {
+      color: $c-grey-500;
+    }
+  }
+}
+
+@mixin bg-image($img: "") {
+  background-image: url($img);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@mixin flex($align: start, $justify: start) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
 }
