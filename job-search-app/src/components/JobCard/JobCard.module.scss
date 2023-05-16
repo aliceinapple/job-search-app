@@ -1,0 +1,25 @@
+.jobCard {
+  @include block-style();
+}
+
+.firmName {
+  display: flex;
+  justify-content: space-between;
+}
+
+h2 {
+  @include font-style(
+    $size: $font-size-heading,
+    $weight: 600,
+    $color: $c-blue-500
+  );
+}
+
+li::marker{
+  margin: 0;
+}
+
+.payment {
+  display: flex;
+  gap: 12px;
+}

@@ -57,6 +57,7 @@
   $hoverFill: none,
   $hoverStroke: $c-blue-500
 ) {
+  min-width: 24px;
   transition: $transition-fast;
   fill: $fill;
   * {

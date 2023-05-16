@@ -1,10 +1,16 @@
 .header {
   position: relative;
-  @include font-style();
   @include flex($align: center, $justify: center);
   height: 84px;
   background-color: $c-white;
   padding: 0 10%;
+  a {
+    @include font-style();
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .headerLogo {
@@ -38,5 +44,11 @@ h1 {
     padding: 0;
     @include flex($align: center);
     gap: 60px;
+  }
+}
+
+.active {
+  a {
+    color: $c-blue-500;
   }
 }

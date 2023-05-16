@@ -1,4 +1,5 @@
 import { StarIcon } from "../../UI/Icons";
+import styles from "./JobCard.module.scss";
 
 export interface IJobCard {
   profession: string;
@@ -24,17 +25,17 @@ const JobCard = ({
   town,
 }: IJobCard) => {
   return (
-    <div>
-      <div>
+    <div className={styles.jobCard}>
+      <div className={styles.firmName}>
         <h2>
           {profession} ({firm_name})
         </h2>
         <StarIcon />
       </div>
-      <div>
+      <div className={styles.payment}>
         <span>
-          з/п {payment_from || ""} {payment_to || ""}
-          {!payment_from && !payment_to ? "Не указана" : currency}
+          з/п {payment_from || ""} {payment_to ? `- ${payment_to}` : ""}
+          {!payment_from && !payment_to ? "Не указана" : ` ${currency}`}
         </span>
         <li>{type_of_work.title}</li>
       </div>

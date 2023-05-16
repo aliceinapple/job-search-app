@@ -1,6 +1,9 @@
+import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 const Header = () => {
+  const location = useLocation();
+
   return (
     <header className={styles.header}>
       <div className={styles.headerLogo}>
@@ -10,8 +13,16 @@ const Header = () => {
       <nav className={styles.headerNav}>
         <div>
           <ul>
-            <li>Поиск Вакансий</li>
-            <li>Избранное</li>
+            <li className={location.pathname === "/" ? styles.active : ""}>
+              <Link to="/">Поиск Вакансий</Link>
+            </li>
+            <li
+              className={
+                location.pathname === "/favorites" ? styles.active : ""
+              }
+            >
+              <Link to="/favorites">Избранное</Link>
+            </li>
           </ul>
         </div>
       </nav>

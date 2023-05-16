@@ -17,24 +17,26 @@ const JobSearchPage = () => {
   }, []);
 
   return (
-    <main className={styles.main}>
-      <Filters />
-      <div>
-        <SearchInput />
-      </div>
-      <div>
-        {data.map((item, index) => (
-          <JobCard
-            key={index}
-            profession={item.profession}
-            firm_name={item.firm_name}
-            payment_to={item.payment_to}
-            payment_from={item.payment_from}
-            currency={item.currency}
-            type_of_work={item.type_of_work}
-            town={item.town}
-          />
-        ))}
+    <main className="main">
+      <div className={styles.jobSearchPage}>
+        <Filters />
+        <div>
+          <div className={styles.jobCardsBlock}>
+            <SearchInput />
+            {data.map((item, index) => (
+              <JobCard
+                key={index}
+                profession={item.profession}
+                firm_name={item.firm_name}
+                payment_to={item.payment_to}
+                payment_from={item.payment_from}
+                currency={item.currency}
+                type_of_work={item.type_of_work}
+                town={item.town}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </main>
   );
