@@ -1,7 +1,25 @@
 import { Button } from "../Button";
 import styles from "./SearchInput.module.scss";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSearchValue } from "../../store/searchSlice";
 
-const SearchInput = () => {
+interface ISearchInput {
+  search: () => void;
+}
+
+const SearchInput = ({ search }: ISearchInput) => {
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    dispatch(setSearchValue(`keyword=${inputValue}`));
+  }, [inputValue, dispatch]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <div className={styles.searchInputBlock}>
       <div className={styles.searchInput}>
@@ -19,10 +37,15 @@ const SearchInput = () => {
             strokeLinecap="round"
           />
         </svg>
-        <input type="text" placeholder="Введите название вакансии"></input>
+        <input
+          type="text"
+          placeholder="Введите название вакансии"
+          value={inputValue}
+          onChange={handleInputChange}
+        ></input>
       </div>
       <div>
-        <Button text="Поиск" />
+        <Button text="Поиск" onClick={search} />
       </div>
     </div>
   );
