@@ -17,18 +17,18 @@ const IndustryInput = () => {
   const [value, setValue] = useState("");
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = e.target.value;
-    setValue(selectedOption);
-    dispatch(setIndustryValue(`catalogues=${selectedOption}`));
+    setValue(e.target.value);
   };
 
   useEffect(() => {
     getData("catalogues").then((data) => setData(data));
-  }, []);
+    dispatch(setIndustryValue(value && `catalogues=${value}`));
+  }, [value, dispatch]);
 
   return (
     <div className={styles.industryInputBlock}>
       <select value={value} onChange={handleSelect}>
+        <option value="">Выберите отрасль</option>
         {data.map((item: IOptionType, index) => (
           <option key={`${index}`} value={item.key}>
             {item.title}

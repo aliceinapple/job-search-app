@@ -2,6 +2,7 @@ import { StarIcon } from "../../UI/Icons";
 import styles from "./JobCard.module.scss";
 
 export interface IJobCard {
+  id: number;
   profession: string;
   firm_name: string;
   type_of_work: {
@@ -16,6 +17,7 @@ export interface IJobCard {
 }
 
 const JobCard = ({
+  id,
   profession,
   firm_name,
   payment_to,
@@ -25,7 +27,7 @@ const JobCard = ({
   town,
 }: IJobCard) => {
   return (
-    <div className={styles.jobCard}>
+    <div id={`${id}`} className={styles.jobCard}>
       <div className={styles.firmName}>
         <h2>
           {profession} ({firm_name})

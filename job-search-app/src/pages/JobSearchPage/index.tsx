@@ -36,18 +36,19 @@ const JobSearchPage = () => {
 
     const data = await getData(`vacancies/?${queryParameters}`);
     setData(data.objects);
-    console.log(`vacancies/?${queryParameters}`);
+    console.log(queryParameters);
   };
 
   return (
     <main className="main">
       <div className={styles.jobSearchPage}>
-        <Filters />
+        <Filters apply={handleSearch} />
         <div>
           <div className={styles.jobCardsBlock}>
             <SearchInput search={handleSearch} />
             {data.map((item, index) => (
               <JobCard
+                id={item.id}
                 key={index}
                 profession={item.profession}
                 firm_name={item.firm_name}

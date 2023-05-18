@@ -13,7 +13,7 @@ const SearchInput = ({ search }: ISearchInput) => {
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    dispatch(setSearchValue(`keyword=${inputValue}`));
+    dispatch(setSearchValue(inputValue && `keyword=${inputValue}`));
   }, [inputValue, dispatch]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

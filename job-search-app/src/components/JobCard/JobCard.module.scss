@@ -5,6 +5,7 @@
 .firmName {
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 h2 {
@@ -13,9 +14,12 @@ h2 {
     $weight: 600,
     $color: $c-blue-500
   );
+  &:hover {
+    color: lighten($color: $c-blue-500, $amount: 10%);
+  }
 }
 
-li::marker{
+li::marker {
   margin: 0;
 }
 

@@ -15,9 +15,10 @@ const SalaryInput = ({ type }: ISalaryInput) => {
 
   useEffect(() => {
     if (type === "от") {
-      value ? dispatch(setSalaryFromValue(`payment_from=${value}`)) : "";
+      dispatch(setSalaryFromValue(value && `payment_from=${value}`));
     } else {
-      value ? dispatch(setSalaryToValue(`payment_to=${value}`)) : "";
+      value;
+      dispatch(setSalaryToValue(value && `payment_to=${value}`));
     }
   }, [value, type, dispatch]);
 
