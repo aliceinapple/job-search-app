@@ -19,13 +19,13 @@
   padding: $padding;
 }
 
-@mixin button-style() {
-  @include font-style($color: $c-white);
+@mixin button-style($font-color: $c-white, $bg-color: $c-blue-500) {
+  @include font-style($color: $font-color);
   border: none;
   padding: 10px 20px;
   border-radius: $border-radius;
   cursor: pointer;
-  background-color: $c-blue-500;
+  background-color: $bg-color;
   transition: $transition-fast;
   width: 100%;
   &:hover {

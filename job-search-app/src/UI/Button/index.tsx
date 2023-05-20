@@ -2,7 +2,7 @@ import styles from "./Button.module.scss";
 
 interface IButton {
   text: string;
-  onClick?: () => void;
+  onClick?: VoidFunction;
 }
 
 export const Button = ({ text, onClick }: IButton) => {

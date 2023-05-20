@@ -2,7 +2,7 @@ import styles from "./Icons.module.scss";
 
 interface IArrowIcon {
   rotate: number;
-  onClick?: () => void;
+  onClick?: VoidFunction;
 }
 
 export const StarIcon = () => {

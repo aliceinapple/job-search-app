@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setSearchValue } from "../../store/searchSlice";
 
 interface ISearchInput {
-  search: () => void;
+  search: VoidFunction;
 }
 
 const SearchInput = ({ search }: ISearchInput) => {

@@ -10,7 +10,7 @@ import { setSalaryFromValue } from "../../store/salaryFromSlice";
 import { setSalaryToValue } from "../../store/salaryToSlice";
 
 interface IFilters {
-  apply: () => void;
+  apply: VoidFunction;
 }
 
 const Filters = ({ apply }: IFilters) => {

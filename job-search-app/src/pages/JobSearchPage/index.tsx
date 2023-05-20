@@ -57,6 +57,7 @@ const JobSearchPage = () => {
                 currency={item.currency}
                 type_of_work={item.type_of_work}
                 town={item.town}
+                vacancyRichText={item.vacancyRichText}
               />
             ))}
           </div>

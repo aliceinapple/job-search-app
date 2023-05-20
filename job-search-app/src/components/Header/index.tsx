@@ -13,7 +13,13 @@ const Header = () => {
       <nav className={styles.headerNav}>
         <div>
           <ul>
-            <li className={location.pathname === "/" ? styles.active : ""}>
+            <li
+              className={
+                location.pathname === "/" || location.pathname === "/main"
+                  ? styles.active
+                  : ""
+              }
+            >
               <Link to="/">Поиск Вакансий</Link>
             </li>
             <li

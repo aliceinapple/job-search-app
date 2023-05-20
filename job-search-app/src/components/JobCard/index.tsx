@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import { StarIcon } from "../../UI/Icons";
 import styles from "./JobCard.module.scss";
+import { useDispatch } from "react-redux";
+import { setJobCard } from "../../store/jobCardSlice";
 
 export interface IJobCard {
   id: number;
@@ -14,6 +17,7 @@ export interface IJobCard {
   payment_to?: string;
   payment_from?: string;
   currency: string;
+  vacancyRichText: string;
 }
 
 const JobCard = ({
@@ -25,12 +29,32 @@ const JobCard = ({
   currency,
   type_of_work,
   town,
+  vacancyRichText,
 }: IJobCard) => {
+  const dispatch = useDispatch();
+  const card = {
+    id,
+    profession,
+    firm_name,
+    payment_to,
+    payment_from,
+    currency,
+    type_of_work,
+    town,
+    vacancyRichText,
+  };
+
+  const getJobData = () => {
+    dispatch(setJobCard(card));
+  };
+
   return (
-    <div id={`${id}`} className={styles.jobCard}>
+    <div className={styles.jobCard}>
       <div className={styles.firmName}>
         <h2>
-          {profession} ({firm_name})
+          <Link onClick={getJobData} to={`/profession/${id}`}>
+            {profession} ({firm_name})
+          </Link>
         </h2>
         <StarIcon />
       </div>
