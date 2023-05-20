@@ -15,7 +15,9 @@ const Header = () => {
           <ul>
             <li
               className={
-                location.pathname === "/" || location.pathname === "/main"
+                location.pathname === "/" ||
+                location.pathname === "/main" ||
+                location.pathname.startsWith("/profession")
                   ? styles.active
                   : ""
               }

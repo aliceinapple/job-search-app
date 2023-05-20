@@ -1,28 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SearchInput from "../../UI/SearchInput";
 import { getData } from "../../components/API";
 import Filters from "../../components/Filters";
-import JobCard, { IJobCard } from "../../components/JobCard";
+import JobCard from "../../components/JobCard";
 import styles from "./JobSearchPage.module.scss";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
+import { Initial } from "../../components/Router";
 
-interface IJobSearchData {
-  objects: IJobCard[];
-}
-
-const JobSearchPage = () => {
-  const [data, setData] = useState<IJobCard[]>([]);
+const JobSearchPage = ({ initialData }: Initial) => {
+  const [data, setData] = useState(initialData);
   const searchValue = useSelector((state: RootState) => state.search.value);
   const industryValue = useSelector((state: RootState) => state.industry.value);
   const salaryFromValue = useSelector(
     (state: RootState) => state.salaryFrom.value
   );
   const salaryToValue = useSelector((state: RootState) => state.salaryTo.value);
-
-  useEffect(() => {
-    getData("vacancies").then((data: IJobSearchData) => setData(data.objects));
-  }, []);
 
   const handleSearch = async () => {
     const queryParameters = [
@@ -36,7 +29,6 @@ const JobSearchPage = () => {
 
     const data = await getData(`vacancies/?${queryParameters}`);
     setData(data.objects);
-    console.log(queryParameters);
   };
 
   return (

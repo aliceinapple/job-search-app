@@ -1,0 +1,20 @@
+.jobCardPage {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.transformCard {
+  h2 {
+    a {
+      font-size: 28px;
+      pointer-events: none;
+      color: $c-black;
+    }
+  }
+}
+
+.description {
+  @include block-style();
+}

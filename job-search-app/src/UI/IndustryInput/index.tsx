@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
-import { getData } from "../../components/API";
 import styles from "./IndustryInput.module.scss";
 import { ArrowIconLarge } from "../Icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setIndustryValue } from "../../store/industrySlice";
+import { RootState } from "../../store/store";
 
-interface IOptionType {
+export interface IOptionType {
   title: string;
   key: number;
 }
 
 const IndustryInput = () => {
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
+  const industruOptions = useSelector(
+    (state: RootState) => state.industry.data
+  );
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value);
   };
 
   useEffect(() => {
-    getData("catalogues").then((data) => setData(data));
     dispatch(setIndustryValue(value && `catalogues=${value}`));
   }, [value, dispatch]);
 
@@ -29,7 +30,7 @@ const IndustryInput = () => {
     <div className={styles.industryInputBlock}>
       <select value={value} onChange={handleSelect}>
         <option value="">Выберите отрасль</option>
-        {data.map((item: IOptionType, index) => (
+        {industruOptions.map((item: IOptionType, index) => (
           <option key={`${index}`} value={item.key}>
             {item.title}
           </option>

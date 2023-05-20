@@ -1,15 +1,21 @@
 import styles from "./Icons.module.scss";
 
+interface IStarIcon {
+  isFavorite: boolean;
+  addToFavorites: VoidFunction;
+}
+
 interface IArrowIcon {
   rotate: number;
   onClick?: VoidFunction;
 }
 
-export const StarIcon = () => {
-  const stroke = false;
+export const StarIcon = ({ isFavorite, addToFavorites }: IStarIcon) => {
+  const stroke = isFavorite;
   return (
     <svg
       className={styles.star + (stroke ? ` ${styles.selected}` : "")}
+      onClick={addToFavorites}
       width="22"
       height="20"
       viewBox="0 0 22 20"
