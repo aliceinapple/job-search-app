@@ -12,34 +12,68 @@ export interface IOptionType {
 
 const IndustryInput = () => {
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [value, setValue] = useState("");
-  const industruOptions = useSelector(
+
+  const industryOptions = useSelector(
     (state: RootState) => state.industry.data
   );
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(e.target.value);
+  const handleToggleOptions = () => {
+    setIsOptionsOpen(!isOptionsOpen);
   };
 
   useEffect(() => {
-    dispatch(setIndustryValue(value && `catalogues=${value}`));
+    dispatch(setIndustryValue(value));
   }, [value, dispatch]);
 
   return (
-    <div className={styles.industryInputBlock}>
-      <select value={value} onChange={handleSelect}>
-        <option value="">Выберите отрасль</option>
-        {industruOptions.map((item: IOptionType, index) => (
-          <option key={`${index}`} value={item.key}>
-            {item.title}
-          </option>
-        ))}
-      </select>
-      <ArrowIconLarge
-        rotate={isOpen ? 0 : 180}
-        onClick={() => setIsOpen(!isOpen)}
-      />
+    <div
+      className={`${styles.industryInputBlock} ${
+        isOptionsOpen ? styles.highlight : ""
+      }`}
+    >
+      <div className={styles.selectWrapper}>
+        <div
+          className={`${styles.select} ${isOptionsOpen ? styles.open : ""}`}
+          onClick={handleToggleOptions}
+        >
+          <div className={styles.selectedOption}>
+            {value ? (
+              industryOptions.find((option) => option.key === parseInt(value))
+                ?.title
+            ) : (
+              <span className={styles.placeholder}>Выберите отрасль</span>
+            )}
+          </div>
+          <ArrowIconLarge
+            isOpen={isOptionsOpen}
+            rotate={isOptionsOpen ? 0 : 180}
+          />
+        </div>
+        {isOptionsOpen && (
+          <div className={styles.optionsBlockWrapper}>
+            <div className={styles.optionsBlock}>
+              <ul className={styles.options}>
+                {industryOptions.map((option) => (
+                  <li
+                    key={option.key}
+                    className={`${styles.option} ${
+                      value === option.key.toString() ? styles.selected : ""
+                    }`}
+                    onClick={() => {
+                      setValue(option.key.toString());
+                      setIsOptionsOpen(false);
+                    }}
+                  >
+                    {option.title}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

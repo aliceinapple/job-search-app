@@ -15,29 +15,37 @@ const SalaryInput = ({ type }: ISalaryInput) => {
 
   useEffect(() => {
     if (type === "от") {
-      dispatch(setSalaryFromValue(value && `payment_from=${value}`));
+      dispatch(setSalaryFromValue(value));
     } else {
       value;
-      dispatch(setSalaryToValue(value && `payment_to=${value}`));
+      dispatch(setSalaryToValue(value));
     }
   }, [value, type, dispatch]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    const inputValue = e.target.value;
+    const sanitizedValue = inputValue.replace(/\D/g, "");
+    setValue(sanitizedValue);
   };
 
   const increase = () => {
-    setValue((prev) => String(Number(prev) + 1));
+    if (Number(value) >= 0) {
+      setValue((prev) => String(Number(prev) + 1));
+    }
   };
 
   const decrease = () => {
-    setValue((prev) => String(Number(prev) - 1));
+    if (Number(value) > 0) {
+      setValue((prev) => String(Number(prev) - 1));
+    }
   };
 
   return (
     <div className={styles.salaryInputBlock}>
       <input
-        type="number"
+        type="text"
+        pattern="[0-9]*"
+        inputMode="numeric"
         placeholder={type}
         value={value}
         onChange={handleInputChange}

@@ -6,7 +6,6 @@ import JobCard from "../../components/JobCard";
 
 const Favorites = () => {
   const favorites = useSelector((state: RootState) => state.favorites.value);
-  console.log(favorites);
 
   return (
     <div className={styles.favorites}>

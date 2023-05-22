@@ -19,3 +19,9 @@
     $hoverFill: $c-blue-500
   );
 }
+
+.highlight {
+  * {
+    stroke: $c-blue-500;
+  }
+}

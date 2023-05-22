@@ -3,8 +3,63 @@
   gap: 28px;
 }
 
+.jobPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .jobCardsBlock {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  margin: 40px;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    list-style-type: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid $c-grey-300;
+    background-color: $c-white;
+    @include font-style($size: 16px, $weight: 400);
+    transition: $transition-fast;
+    &:hover {
+      background-color: $c-blue-100;
+    }
+    &:active {
+      background-color: $c-blue-300;
+    }
+  }
+}
+
+.active {
+  transition: $transition-fast;
+  background-color: $c-blue-500 !important;
+  a {
+    color: $c-white;
+  }
+}
+
+.disabled {
+  a {
+    color: $c-grey-300;
+  }
+  li {
+    border: 1px solid $c-grey-200;
+  }
+}
+
+.next,
+.prev {
+  color: $c-grey-600;
 }
