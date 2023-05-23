@@ -10,21 +10,26 @@ import ReactPaginate from "react-paginate";
 import { setMainData } from "../../store/mainDataSlice";
 import Loader from "../../components/Loader";
 import EmptyStatePage from "../EmptyStatePage";
+import { setCurrentPageValue } from "../../store/currentPageSlice";
 
 const JobSearchPage = () => {
   const dispatch = useDispatch();
+
+  const currentPage = useSelector(
+    (state: RootState) => state.currentPage.value
+  );
   const mainData = useSelector((state: RootState) => state.mainData.value);
-  const [data, setData] = useState<IJobCard[]>(mainData);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const itemsPerPage = 4;
   const searchValue = useSelector((state: RootState) => state.search.value);
   const industryValue = useSelector((state: RootState) => state.industry.value);
   const salaryFromValue = useSelector(
     (state: RootState) => state.salaryFrom.value
   );
   const salaryToValue = useSelector((state: RootState) => state.salaryTo.value);
+
+  const [data, setData] = useState<IJobCard[]>(mainData);
+  const [totalItems, setTotalItems] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const itemsPerPage = 4;
 
   const handleSearch = async (pageNumber: number) => {
     setIsLoading(true);
@@ -42,9 +47,11 @@ const JobSearchPage = () => {
 
       const result = await getData(`vacancies/?${queryParameters}`);
       setData(result.objects);
+
       dispatch(setMainData(result.objects));
+      dispatch(setCurrentPageValue(pageNumber));
+
       setTotalItems(result.total);
-      setCurrentPage(pageNumber);
     } catch (error) {
       console.log(error);
     } finally {
@@ -64,6 +71,13 @@ const JobSearchPage = () => {
   useEffect(() => {
     setData(mainData);
   }, [mainData]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    handleSearch(currentPage);
+  }, [currentPage]);
+
+  const normalizedCurrentPage = Math.min(currentPage, pageCount - 1);
 
   return (
     <main className="main">
@@ -105,7 +119,7 @@ const JobSearchPage = () => {
           marginPagesDisplayed={0}
           pageRangeDisplayed={3}
           onPageChange={handlePageChange}
-          forcePage={currentPage}
+          forcePage={normalizedCurrentPage}
           containerClassName={styles.pagination}
           previousLinkClassName={styles.prev}
           nextLinkClassName={styles.next}
