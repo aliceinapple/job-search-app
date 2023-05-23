@@ -3,6 +3,14 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @include font-style($size: $font-size-regular);
+  @media screen and (max-width: 800px) {
+    padding: 40px 20px;
+    @include font-style($size: $font-size-small);
+  }
+  @media screen and (max-width: 500px) {
+    padding: 40px 0;
+  }
 }
 
 .transformCard {
@@ -11,6 +19,13 @@
       font-size: 28px;
       pointer-events: none;
       color: $c-black;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    h2 {
+      a {
+        font-size: 18px;
+      }
     }
   }
 }
@@ -22,5 +37,13 @@
   }
   b {
     @include font-style($size: $font-size-heading, $weight: 700);
+  }
+  @media screen and (max-width: 800px) {
+    p {
+      @include font-style($size: $font-size-small, $weight: 400);
+    }
+    b {
+      @include font-style($size: $font-size-small, $weight: 700);
+    }
   }
 }

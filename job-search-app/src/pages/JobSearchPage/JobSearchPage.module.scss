@@ -3,6 +3,9 @@
   grid-template-columns: 35% 65%;
   gap: 28px;
   width: 100%;
+  @media screen and (max-width: 890px) {
+    grid-template-columns: 100%;
+  }
 }
 
 .jobPageContainer {

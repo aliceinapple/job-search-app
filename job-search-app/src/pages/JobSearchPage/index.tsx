@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { setMainData } from "../../store/mainDataSlice";
 import Loader from "../../components/Loader";
+import EmptyStatePage from "../EmptyStatePage";
 
 const JobSearchPage = () => {
   const dispatch = useDispatch();
@@ -72,23 +73,27 @@ const JobSearchPage = () => {
           <div>
             <div className={styles.jobCardsBlock}>
               <SearchInput search={() => handleSearch(currentPage)} />
-              {isLoading ? (
-                <Loader />
+              {data.length ? (
+                isLoading ? (
+                  <Loader />
+                ) : (
+                  data.map((item, index) => (
+                    <JobCard
+                      id={item.id}
+                      key={index}
+                      profession={item.profession}
+                      firm_name={item.firm_name}
+                      payment_to={item.payment_to}
+                      payment_from={item.payment_from}
+                      currency={item.currency}
+                      type_of_work={item.type_of_work}
+                      town={item.town}
+                      vacancyRichText={item.vacancyRichText}
+                    />
+                  ))
+                )
               ) : (
-                data.map((item, index) => (
-                  <JobCard
-                    id={item.id}
-                    key={index}
-                    profession={item.profession}
-                    firm_name={item.firm_name}
-                    payment_to={item.payment_to}
-                    payment_from={item.payment_from}
-                    currency={item.currency}
-                    type_of_work={item.type_of_work}
-                    town={item.town}
-                    vacancyRichText={item.vacancyRichText}
-                  />
-                ))
+                <EmptyStatePage />
               )}
             </div>
           </div>

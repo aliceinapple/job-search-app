@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import styles from "./Favorites.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import JobCard from "../../components/JobCard";
+import EmptyStatePage from "../EmptyStatePage";
 
 const Favorites = () => {
   const favorites = useSelector((state: RootState) => state.favorites.value);
@@ -25,13 +25,7 @@ const Favorites = () => {
           />
         ))
       ) : (
-        <div className={styles.emptyFavorites}>
-          <div className={styles.notFoundImg}></div>
-          <h2>Упс, здесь еще ничего нет!</h2>
-          <Link to={"/main"}>
-            <button className={styles.toMainBtn}>Поиск Вакансий</button>
-          </Link>
-        </div>
+        <EmptyStatePage />
       )}
     </div>
   );

@@ -28,6 +28,9 @@ h1 {
     $color: $c-black
   );
   letter-spacing: -0.02em;
+  @media screen and (max-width: 750px) {
+    display: none;
+  }
 }
 
 .headerLogoImg {
@@ -44,6 +47,12 @@ h1 {
     padding: 0;
     @include flex($align: center);
     gap: 60px;
+    @media screen and (max-width: 500px) {
+      gap: 20px;
+    }
+    @media screen and (max-width: 390px) {
+      flex-direction: column;
+    }
   }
 }
 
