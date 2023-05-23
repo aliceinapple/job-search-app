@@ -5,15 +5,19 @@ interface IButton {
   onClick?: VoidFunction;
 }
 
-export const Button = ({ text, onClick }: IButton) => {
+export const Button: React.FC<IButton> = ({ text, onClick }) => {
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button
+      className={styles.button}
+      onClick={onClick}
+      data-elem="search-button"
+    >
       {text}
     </button>
   );
 };
 
-export const ResetButton = ({ text, onClick }: IButton) => {
+export const ResetButton: React.FC<IButton> = ({ text, onClick }) => {
   return (
     <button className={styles.resetButton} onClick={onClick}>
       {text}

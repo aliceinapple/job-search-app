@@ -5,6 +5,7 @@ import salaryFromReducer from "./salaryFromSlice";
 import salaryToReducer from "./salaryToSlice";
 import jobCardReducer from "./jobCardSlice";
 import favoritesReducer from "./favoritesSlice";
+import mainData from "./mainDataSlice";
 
 const rootReducer = combineReducers({
   search: searchReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   salaryTo: salaryToReducer,
   jobCard: jobCardReducer,
   favorites: favoritesReducer,
+  mainData: mainData,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -25,6 +27,7 @@ const store = configureStore({
     salaryTo: salaryToReducer,
     jobCard: jobCardReducer,
     favorites: favoritesReducer,
+    mainData: mainData,
   },
 });
 

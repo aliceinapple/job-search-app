@@ -5,8 +5,9 @@ interface FavoritesState {
   value: IJobCard[];
 }
 
+const storedFavorites = localStorage.getItem("favorites");
 const initialState: FavoritesState = {
-  value: [],
+  value: storedFavorites ? JSON.parse(storedFavorites) : [],
 };
 
 const favoritesSlice = createSlice({
@@ -15,6 +16,7 @@ const favoritesSlice = createSlice({
   reducers: {
     setFavoritesValue: (state, action: PayloadAction<IJobCard[]>) => {
       state.value = action.payload;
+      localStorage.setItem("favorites", JSON.stringify(action.payload));
     },
   },
 });

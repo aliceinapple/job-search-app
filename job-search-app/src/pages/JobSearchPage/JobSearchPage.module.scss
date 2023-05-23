@@ -1,6 +1,8 @@
 .jobSearchPage {
-  display: flex;
+  display: grid;
+  grid-template-columns: 35% 65%;
   gap: 28px;
+  width: 100%;
 }
 
 .jobPageContainer {

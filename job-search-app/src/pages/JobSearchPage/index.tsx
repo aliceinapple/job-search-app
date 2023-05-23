@@ -5,13 +5,18 @@ import Filters from "../../components/Filters";
 import JobCard, { IJobCard } from "../../components/JobCard";
 import styles from "./JobSearchPage.module.scss";
 import { RootState } from "../../store/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
+import { setMainData } from "../../store/mainDataSlice";
+import Loader from "../../components/Loader";
 
 const JobSearchPage = () => {
-  const [data, setData] = useState<IJobCard[]>([]);
+  const dispatch = useDispatch();
+  const mainData = useSelector((state: RootState) => state.mainData.value);
+  const [data, setData] = useState<IJobCard[]>(mainData);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const itemsPerPage = 4;
   const searchValue = useSelector((state: RootState) => state.search.value);
   const industryValue = useSelector((state: RootState) => state.industry.value);
@@ -21,41 +26,43 @@ const JobSearchPage = () => {
   const salaryToValue = useSelector((state: RootState) => state.salaryTo.value);
 
   const handleSearch = async (pageNumber: number) => {
-    const queryParameters = [
-      `page=${pageNumber + 1}`,
-      `count=${itemsPerPage}`,
-      searchValue && `keyword=${searchValue}`,
-      industryValue && `catalogues=${industryValue}`,
-      salaryFromValue && `payment_from=${salaryFromValue}`,
-      salaryToValue && `payment_to=${salaryToValue}`,
-    ]
-      .filter((item) => item)
-      .join("&");
+    setIsLoading(true);
+    try {
+      const queryParameters = [
+        `page=${pageNumber}`,
+        `count=${itemsPerPage}`,
+        searchValue && `keyword=${searchValue}`,
+        industryValue && `catalogues=${industryValue}`,
+        salaryFromValue && `payment_from=${salaryFromValue}`,
+        salaryToValue && `payment_to=${salaryToValue}`,
+      ]
+        .filter((item) => item)
+        .join("&");
 
-    const data = await getData(`vacancies/?${queryParameters}`);
-    setData(data.objects);
-    setTotalItems(data.total);
-  };
-
-  const totalPage = Math.max(Math.ceil(totalItems / itemsPerPage), 0);
-  const pageCount = totalPage > 500 ? 500 : totalPage;
-
-  const handlePageChange = (selectedItem: { selected: number }) => {
-    if (selectedItem.selected < 0) {
-      setCurrentPage(0);
-      handleSearch(currentPage);
-    } else if (selectedItem.selected >= totalPage) {
-      setCurrentPage(totalPage - 1);
-      handleSearch(currentPage);
-    } else {
-      setCurrentPage(selectedItem.selected);
-      handleSearch(currentPage);
+      const result = await getData(`vacancies/?${queryParameters}`);
+      setData(result.objects);
+      dispatch(setMainData(result.objects));
+      setTotalItems(result.total);
+      setCurrentPage(pageNumber);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  const handlePageChange = (selectedItem: { selected: number }) => {
+    handleSearch(selectedItem.selected);
+  };
+
+  const pageCount =
+    Math.ceil(totalItems / itemsPerPage) > 500
+      ? 500
+      : Math.ceil(totalItems / itemsPerPage);
+
   useEffect(() => {
-    handleSearch(currentPage);
-  },[]);
+    setData(mainData);
+  }, [mainData]);
 
   return (
     <main className="main">
@@ -65,20 +72,24 @@ const JobSearchPage = () => {
           <div>
             <div className={styles.jobCardsBlock}>
               <SearchInput search={() => handleSearch(currentPage)} />
-              {data.map((item, index) => (
-                <JobCard
-                  id={item.id}
-                  key={index}
-                  profession={item.profession}
-                  firm_name={item.firm_name}
-                  payment_to={item.payment_to}
-                  payment_from={item.payment_from}
-                  currency={item.currency}
-                  type_of_work={item.type_of_work}
-                  town={item.town}
-                  vacancyRichText={item.vacancyRichText}
-                />
-              ))}
+              {isLoading ? (
+                <Loader />
+              ) : (
+                data.map((item, index) => (
+                  <JobCard
+                    id={item.id}
+                    key={index}
+                    profession={item.profession}
+                    firm_name={item.firm_name}
+                    payment_to={item.payment_to}
+                    payment_from={item.payment_from}
+                    currency={item.currency}
+                    type_of_work={item.type_of_work}
+                    town={item.town}
+                    vacancyRichText={item.vacancyRichText}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -91,10 +102,10 @@ const JobSearchPage = () => {
           onPageChange={handlePageChange}
           forcePage={currentPage}
           containerClassName={styles.pagination}
-          disabledClassName={styles.disabled}
-          activeClassName={styles.active}
           previousLinkClassName={styles.prev}
           nextLinkClassName={styles.next}
+          disabledClassName={styles.disabled}
+          activeClassName={styles.active}
           breakLabel=""
         />
       </div>

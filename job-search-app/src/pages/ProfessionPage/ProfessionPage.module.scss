@@ -17,4 +17,10 @@
 
 .description {
   @include block-style();
+  p {
+    @include font-style($size: $font-size-regular, $weight: 400);
+  }
+  b {
+    @include font-style($size: $font-size-heading, $weight: 700);
+  }
 }

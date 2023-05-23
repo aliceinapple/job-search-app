@@ -89,6 +89,7 @@
 
 @mixin input-style($border-color: $c-grey-300) {
   padding: 8px 12px;
+  box-sizing: border-box;
   border: 1px solid $border-color;
   border-radius: $border-radius;
   display: flex;

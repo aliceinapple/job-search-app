@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import { ArrowIcon } from "../Icons";
 import styles from "./SalaryInput.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSalaryFromValue } from "../../store/salaryFromSlice";
 import { setSalaryToValue } from "../../store/salaryToSlice";
+import { RootState } from "../../store/store";
 
 interface ISalaryInput {
   type: string;
 }
 
-const SalaryInput = ({ type }: ISalaryInput) => {
+const SalaryInput: React.FC<ISalaryInput> = ({ type }) => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
+
+  const salaryFromValue = useSelector(
+    (state: RootState) => state.salaryFrom.value
+  );
+  const salaryToValue = useSelector((state: RootState) => state.salaryTo.value);
+
+  const [value, setValue] = useState(
+    type === "от" ? salaryFromValue : salaryToValue
+  );
 
   useEffect(() => {
     if (type === "от") {
@@ -49,6 +58,7 @@ const SalaryInput = ({ type }: ISalaryInput) => {
         placeholder={type}
         value={value}
         onChange={handleInputChange}
+        data-elem="salary-from-input salary-to-input"
       ></input>
       <div className={styles.arrowBlock}>
         <ArrowIcon rotate={0} onClick={increase} />

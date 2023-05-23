@@ -3,6 +3,7 @@ import styles from "./Icons.module.scss";
 interface IStarIcon {
   isFavorite: boolean;
   addToFavorites: VoidFunction;
+  id: number;
 }
 
 interface IArrowIcon {
@@ -11,11 +12,16 @@ interface IArrowIcon {
   isOpen?: boolean;
 }
 
-export const StarIcon = ({ isFavorite, addToFavorites }: IStarIcon) => {
+export const StarIcon: React.FC<IStarIcon> = ({
+  isFavorite,
+  addToFavorites,
+  id,
+}) => {
   const stroke = isFavorite;
   return (
     <svg
       className={styles.star + (stroke ? ` ${styles.selected}` : "")}
+      data-elem={`vacancy-${id}-shortlist-button`}
       onClick={addToFavorites}
       width="22"
       height="20"
@@ -30,7 +36,7 @@ export const StarIcon = ({ isFavorite, addToFavorites }: IStarIcon) => {
   );
 };
 
-export const ArrowIcon = ({ rotate, onClick }: IArrowIcon) => {
+export const ArrowIcon: React.FC<IArrowIcon> = ({ rotate, onClick }) => {
   return (
     <svg
       onClick={onClick}
@@ -52,7 +58,11 @@ export const ArrowIcon = ({ rotate, onClick }: IArrowIcon) => {
   );
 };
 
-export const ArrowIconLarge = ({ rotate, onClick, isOpen }: IArrowIcon) => {
+export const ArrowIconLarge: React.FC<IArrowIcon> = ({
+  rotate,
+  onClick,
+  isOpen,
+}) => {
   return (
     <svg
       onClick={onClick}

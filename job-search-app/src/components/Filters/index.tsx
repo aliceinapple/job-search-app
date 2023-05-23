@@ -13,7 +13,7 @@ interface IFilters {
   apply: VoidFunction;
 }
 
-const Filters = ({ apply }: IFilters) => {
+const Filters: React.FC<IFilters> = ({ apply }) => {
   const dispatch = useDispatch();
   const [industryResetCounter, setIndustryResetCounter] = useState(0);
   const [salaryFromResetCounter, setSalaryFromResetCounter] = useState(0);

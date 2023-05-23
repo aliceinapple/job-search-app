@@ -24,7 +24,7 @@ export interface IJobCard {
   selected?: boolean;
 }
 
-const JobCard = ({
+const JobCard: React.FC<IJobCard> = ({
   id,
   profession,
   firm_name,
@@ -35,7 +35,7 @@ const JobCard = ({
   town,
   vacancyRichText,
   classname = "",
-}: IJobCard) => {
+}) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state: RootState) => state.favorites.value);
   const isFavorite = favorites.some((item) => item.id === id);
@@ -65,14 +65,21 @@ const JobCard = ({
   };
 
   return (
-    <div className={`${styles.jobCard} ${classname}`}>
+    <div
+      className={`${styles.jobCard} ${classname}`}
+      data-elem={`vacancy-${id}`}
+    >
       <div className={styles.firmName}>
         <h2>
           <Link onClick={getJobData} to={`/profession/${id}`}>
             {profession} ({firm_name})
           </Link>
         </h2>
-        <StarIcon isFavorite={card.selected} addToFavorites={addToFavorites} />
+        <StarIcon
+          id={id}
+          isFavorite={card.selected}
+          addToFavorites={addToFavorites}
+        />
       </div>
       <div className={`${styles.payment} ${classname}`}>
         <span>
@@ -81,7 +88,7 @@ const JobCard = ({
         </span>
         <li>{type_of_work.title}</li>
       </div>
-      <div>
+      <div className={styles.location}>
         <LocationIcon />
         <span>{town.title}</span>
       </div>

@@ -12,12 +12,13 @@ export interface IOptionType {
 
 const IndustryInput = () => {
   const dispatch = useDispatch();
-  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-  const [value, setValue] = useState("");
-
+  const industryValue = useSelector((state: RootState) => state.industry.value);
   const industryOptions = useSelector(
     (state: RootState) => state.industry.data
   );
+
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [value, setValue] = useState(industryValue);
 
   const handleToggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
@@ -33,7 +34,7 @@ const IndustryInput = () => {
         isOptionsOpen ? styles.highlight : ""
       }`}
     >
-      <div className={styles.selectWrapper}>
+      <div className={styles.selectWrapper} data-elem="industry-select">
         <div
           className={`${styles.select} ${isOptionsOpen ? styles.open : ""}`}
           onClick={handleToggleOptions}
