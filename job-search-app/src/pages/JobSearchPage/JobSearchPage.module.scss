@@ -1,8 +1,11 @@
 .jobSearchPage {
   display: grid;
-  grid-template-columns: 35% 65%;
+  grid-template-columns: 30% 70%;
   gap: 28px;
   width: 100%;
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 35% 65%;
+  }
   @media screen and (max-width: 890px) {
     grid-template-columns: 100%;
   }
