@@ -1,0 +1,32 @@
+h2 {
+  @include font-style($size: $font-size-heading, $weight: 700);
+}
+
+h3 {
+  @include font-style($size: $font-size-regular, $weight: 700);
+}
+
+.filtersBlock {
+  @include block-style();
+  height: fit-content;
+  @media screen and (max-width: 890px) {
+    margin: 0 50px;
+  }
+  @media screen and (max-width: 500px) {
+    margin: 0;
+  }
+}
+
+.filters {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.industry,
+.salary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,27 @@
+.star {
+  @include star-icon-style();
+}
+
+.arrow {
+  @include icon-style();
+  transition: all 0.2s ease-in-out;
+}
+
+.arrowLarge {
+  @include icon-style();
+  position: relative;
+}
+
+.selected {
+  @include star-icon-style(
+    $fill: $c-blue-500,
+    $stroke: $c-blue-500,
+    $hoverFill: $c-blue-500
+  );
+}
+
+.highlight {
+  * {
+    stroke: $c-blue-500;
+  }
+}

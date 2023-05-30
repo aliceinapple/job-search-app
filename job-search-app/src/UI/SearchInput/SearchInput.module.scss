@@ -1,0 +1,13 @@
+.searchInputBlock {
+  @include input-style($border-color: $c-grey-200);
+}
+
+.searchInput {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  width: 100%;
+  @media screen and (max-width: 370px) {
+    width: 100px;
+  }
+}

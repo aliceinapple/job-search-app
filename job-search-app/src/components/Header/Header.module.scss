@@ -1,0 +1,63 @@
+.header {
+  position: relative;
+  @include flex($align: center, $justify: center);
+  height: 84px;
+  background-color: $c-white;
+  padding: 0 10%;
+  a {
+    @include font-style();
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.headerLogo {
+  position: absolute;
+  left: 10%;
+  @include flex($align: center);
+  gap: 12px;
+}
+
+h1 {
+  @include font-style(
+    $font: $font-poppins,
+    $size: 24px,
+    $weight: 600,
+    $color: $c-black
+  );
+  letter-spacing: -0.02em;
+  @media screen and (max-width: 750px) {
+    display: none;
+  }
+}
+
+.headerLogoImg {
+  @include bg-image("../../assets/icons/logo_ico.png");
+  width: 30px;
+  height: 30px;
+}
+
+.headerNav {
+  li {
+    list-style-type: none;
+  }
+  ul {
+    padding: 0;
+    @include flex($align: center);
+    gap: 60px;
+    @media screen and (max-width: 500px) {
+      gap: 20px;
+    }
+    @media screen and (max-width: 390px) {
+      flex-direction: column;
+    }
+  }
+}
+
+.active {
+  a {
+    color: $c-blue-500;
+  }
+}
